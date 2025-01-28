@@ -75,6 +75,14 @@ jobs:
         shell: cmd
         run: |
           copy doc\test.html pages\dev\
+
+      - name: Check result
+        shell: cmd
+        run: |
+          echo "==================== STABLE =========================="
+          type pages\stable\test.html
+          echo "==================== DEV    =========================="
+          type pages\dev\test.html
             
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
