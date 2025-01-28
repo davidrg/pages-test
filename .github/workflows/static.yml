@@ -44,6 +44,8 @@ jobs:
           mkdir pages\dev
           mkdir pages\artifact
           copy index.html pages\
+
+          echo "Trigger: ${{ github.ref_type }}"
         
       - name: Get stable docs
         if: github.ref_type != 'tag'
@@ -65,7 +67,6 @@ jobs:
           7z a -tzip artifact\stable.zip stable
 
       - name: Use current build as dev docs
-        if: github.ref_type != 'tag'
         shell: cmd
         run: |
           copy doc\test.html pages\dev\
