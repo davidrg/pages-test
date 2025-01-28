@@ -1,2 +1,2 @@
 # pages-test
-Testing Github Pages
+This is just a temporary repository to test github pages deployment before I set it up on another repository.
