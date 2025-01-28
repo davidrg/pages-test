@@ -55,7 +55,7 @@ jobs:
           if not exist artifact\stable.zip echo "have_stable_artifact=no" >> "$GITHUB_ENV"
           
       - name: Use current build as stable docs
-        if: github.ref_type != 'tag' || env.have_stable_artifact == "no"
+        if: github.ref_type != 'tag' || env.have_stable_artifact == 'no'
         shell: cmd
         run: |
           copy doc\test.html pages\stable\
