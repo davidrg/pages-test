@@ -62,9 +62,14 @@ jobs:
         if: github.ref_type == 'tag' || env.have_stable_artifact == 'no'
         shell: cmd
         run: |
-          copy doc\test.html pages\stable\
           cd pages
+          dir
+          dir stable\
+          copy ..\doc\test.html stable\
+          dir
+          dir stable\
           7z a -tzip artifact\stable.zip stable
+          dir artifact\
 
       - name: Use current build as dev docs
         shell: cmd
