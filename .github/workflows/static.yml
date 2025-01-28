@@ -47,7 +47,7 @@ jobs:
         shell: cmd
         run: |
           cd pages\artifact
-          wget https://davidrg.github.io/pages-test/artifact/stable.zip
+          curl https://davidrg.github.io/pages-test/artifact/stable.zip
           cd ..
           7z x artifact\stable.zip
           
