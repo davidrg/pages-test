@@ -59,7 +59,8 @@ jobs:
         shell: cmd
         run: |
           copy doc\test.html pages\stable\
-          7z a -tzip pages\artifact\stable.zip stable
+          cd pages
+          7z a -tzip artifact\stable.zip stable
 
       - name: Use current build as dev docs
         if: github.ref_type != 'tag'
