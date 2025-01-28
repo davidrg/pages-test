@@ -47,9 +47,8 @@ jobs:
         if: github.ref_type != 'tag'
         shell: cmd
         run: |
-          cd pages\artifact
-          curl https://davidrg.github.io/pages-test/artifact/stable.zip
-          cd ..
+          cd pages
+          curl -o artifact\stable.zip https://davidrg.github.io/pages-test/artifact/stable.zip
           if exist artifact\stable.zip echo Have stable artifact
           if exist artifact\stable.zip 7z x artifact\stable.zip
           if not exist artifact\stable.zip echo Don't have stable artifact, deploying this build as stable.
