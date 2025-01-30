@@ -36,7 +36,9 @@ jobs:
         shell: bash
         run: |
           SHA=`git rev-parse HEAD`
+          echo "SHA: $SHA"
           TAG=`git describe --exact-match $SHA`
+          echo "Tag: $TAG"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           
   # Single deploy job since we're just deploying
