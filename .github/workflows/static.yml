@@ -37,7 +37,7 @@ jobs:
         run: |
           SHA=`git rev-parse HEAD`
           echo "SHA: $SHA"
-          TAG=`git describe --exact-match $SHA` || true
+          TAG=`git describe --tags --exact-match $SHA` || true
           echo "Tag: $TAG"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           
