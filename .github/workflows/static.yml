@@ -24,20 +24,38 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check-for-tag:
+    runs-on: windows-latest
+    outputs:
+      commit-tag: ${{ steps.check-for-tag.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check if commit is tagged
+        id: check-for-tag
+        shell: bash
+        run: |
+          SHA=`git rev-parse HEAD`
+          TAG=`git describe --exact-match $SHA`
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          
   # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: windows-latest
+    needs: check-for-tag
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        
+      
       - name: Create directories
         shell: cmd
+        env:
+          TAG: ${{needs.check-for-tag.outputs.commit-tag}}
         run: |
           mkdir pages
           mkdir pages\stable
@@ -46,6 +64,7 @@ jobs:
           copy index.html pages\
 
           echo "Trigger: ${{ github.ref_type }}"
+          echo "Tag: %TAG%
         
       - name: Get stable docs
         if: github.ref_type != 'tag'
